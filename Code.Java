@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 //comment added by Jagat
 // for UAT & DEV
 //Adding new Commnent...
+// Function to print hello world
 public class HelloWorld {
 
 	public static void main(String[] args) {
