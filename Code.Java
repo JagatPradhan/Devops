@@ -13,6 +13,10 @@ public class HelloWorld {
 
 	public static void main(String[] args) {
 		
+		{
+			
+		}
+		
 		ApplicationContext hw = SpringApplication.run(HelloWorld.class, args);
 		System.out.println("Hello Spring Boot....");
 	
