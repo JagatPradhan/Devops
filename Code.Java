@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-//Comment
+//comment added by Jagat
+// for UAT & DEV
 //Adding new Commnent...
 public class HelloWorld {
 
