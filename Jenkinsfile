@@ -1,10 +1,12 @@
 pipeline{
     agent any
     stages{
-        stage('Build'){
+        stage('Build and Unit Test'){
             steps{
-                echo "Building the Job with MAVENNNN"
-                sh 'mvn clean package'
+                echo "Building the Job with unit test"
+                sh 'mvn clean verify -DskipIts=true';
+                junit '**target/surefire-reports/TEST-*.xml'
+                archive 'target/*.jar'
             }
         }
 
@@ -19,4 +21,3 @@ pipeline{
     }
     
     }
-
