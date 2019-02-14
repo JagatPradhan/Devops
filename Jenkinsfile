@@ -6,7 +6,7 @@ pipeline{
                 echo "Building the Job with unit test"
                 sh 'mvn clean verify -DskipIts=true';
                 junit '**target/surefire-reports/TEST-*.xml'
-                archive 'target/*.jar'
+                archiveArtifacts 'target/*.jar'
             }
         }
 
