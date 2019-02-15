@@ -25,7 +25,7 @@ pipeline{
             }
         }
 
-        Stage('Publish'){
+        stage('Publish'){
             steps{
             def server  = Artifactory.server 'Default Artifactory Server'
             def uploadSpec = """{
