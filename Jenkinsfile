@@ -6,10 +6,15 @@ pipeline{
                 echo "Building the Job with unit test"
                 sh 'mvn clean verify -DskipIts=true';
                 junit '**target/surefire-reports/TEST-*.xml'
-                archiveArtifacts 'target/*.jar'
+                archive 'target/*.jar'
             }
         }
+        stage('integration test'){
 
+            sh 'mvn clean verify -Dsurefire.skip=true';
+            junit '**/target/failsafe-reports/TEST-*.xml'
+            archive'target/*.jar'
+        }
         stage('SonarQube Testing'){
             steps{
                 echo "===Static Code Analysis started=="
