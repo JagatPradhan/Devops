@@ -9,19 +9,20 @@ pipeline{
                 archive 'target/*.jar'
             }
         }
-        stage('integration test'){
-            steps{
-            sh 'mvn clean verify -Dsurefire.skip=true';
-            junit '**target/failsafe-reports/TEST-*.xml'
-            archive'target/*.jar'
-            }
-        }
+        
         stage('SonarQube Testing'){
             steps{
                 echo "===Static Code Analysis started=="
                 sh 'mvn clean verify sonar:sonar -Dsonar.projectName=PRADHAN -Dsonar.projectKey=PRADHAN -Dsonar.projectVersion=$BUILD_NUMBER'
             }
 
+        }
+        stage('integration test'){
+            steps{
+            sh 'mvn clean verify -Dsurefire.skip=true';
+            junit '**target/failsafe-reports/TEST-*.xml'
+            archive'target/*.jar'
+            }
         }
 
     }
