@@ -5,7 +5,7 @@ pipeline{
             steps{
                 echo "Building the Job with unit test"
                 sh 'mvn clean verify -DskipIts=true';
-                junit '**target/surefire-reports/TEST-*.xml'
+                junit '**/target/surefire-reports/TEST-*.xml'
                 archive 'target/*.jar'
             }
         }
@@ -20,8 +20,26 @@ pipeline{
         stage('integration test'){
             steps{
             sh 'mvn clean verify -Dsurefire.skip=true';
-            junit '**target/failsafe-reports/TEST-*.xml'
+            junit '**/target/failsafe-reports/TEST-*.xml'
             archive'target/*.jar'
+            }
+        }
+
+        Stage('Publish'){
+            steps{
+            def server  = Artifactory.server 'Default Artifactory Server'
+            def uploadSpec = """{
+
+                "files": [
+                    {
+
+                        "pattern": "target/hello-0.0.1.war",
+                        "taregt": "example-project/${BUILD_NUMBER}/"
+                        "props": "Integration-Tested=Yes;Performance-Tested=No"
+                    }
+                ]
+            }"""
+            server.upload(uploadSpec)
             }
         }
 
