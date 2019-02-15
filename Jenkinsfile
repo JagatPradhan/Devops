@@ -12,7 +12,7 @@ pipeline{
         stage('integration test'){
             steps{
             sh 'mvn clean verify -Dsurefire.skip=true';
-            junit '**/target/failsafe-reports/TEST-*.xml'
+            junit '**target/failsafe-reports/TEST-*.xml'
             archive'target/*.jar'
             }
         }
